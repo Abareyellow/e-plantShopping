@@ -21,10 +21,8 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleContinueShopping = (e) => {
-    console.log(onContinueShopping)
-    console.log(e)
-    e.preventDefault()
-    onContinueShopping()
+    
+    onContinueShopping(e)
   };
 
   const handleIncrement = (item) => {
