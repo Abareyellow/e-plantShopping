@@ -74,6 +74,10 @@ body {
     gap: 20px;
 }
 
+.center {
+    text-align:center
+}
+
 /* Pseudo-classes - Hover effect on product button */
 .product-card:hover {
     transform: scale(1.05);
