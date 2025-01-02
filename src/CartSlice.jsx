@@ -16,14 +16,14 @@ export const CartSlice = createSlice({
         }
     },
     removeItem: (state, action) => {
-        state.items = state.items.filter(item => item.name !== action.payload);
+        const name = action.payload
+        state.items = state.items.filter(item => item.name !== name);
     },
     updateQuantity: (state, action) => {
-        const { id, quantity } = action.payload;
-        const itemToUpdate = state.items.find(item => item.id === id);
-        if (itemToUpdate) {
-            itemToUpdate.quantity = quantity;
-        }
+        const { name, quantity } = action.payload;
+        state.items = state.items.map(item =>
+            item.name === name ? { ...item, quantity } : item
+        );
     },
   },
 });

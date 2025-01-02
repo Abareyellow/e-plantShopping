@@ -218,6 +218,16 @@ body {
   .product-button:hover {
     background-color: #45a049;
   }
+
+  .total {
+    position: absolute;
+    top: 15px;
+    right: 15px; 
+    color: white;
+    border-radius: 50%;
+    padding: 5px;
+    font-size: 22px;
+  }
   
   .product-button.added-to-cart {
     background-color: grey; /* Grey when product is added */

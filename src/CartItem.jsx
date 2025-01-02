@@ -6,7 +6,9 @@ import './CartItem.css';
 const CartItem = ({ onContinueShopping }) => {
   const cart = useSelector(state => state.cart.items);
   const dispatch = useDispatch();
-  console.log(cart)
+  const cartItem = useSelector(state => state.cart.items)
+  const totalItems = cartItem.reduce((total, item) => total + item.quantity, 0)
+  //console.log(cart)
   // Calculate total amount for all products in the cart
   const calculateTotalAmount = () => {
     let total = 0;
@@ -15,28 +17,31 @@ const CartItem = ({ onContinueShopping }) => {
         cost = parseInt(plant.cost.replace("$", ""))
         total += (cost * plant.quantity)
     })
-    console.log(total)
     return total
   };
 
   const handleContinueShopping = (e) => {
+    console.log(onContinueShopping)
+    console.log(e)
+    e.preventDefault()
     onContinueShopping()
   };
 
   const handleIncrement = (item) => {
-    dispatch(updateQuantity({id: item.id, quantity: item.quantity + 1}))
+    dispatch(updateQuantity({name: item.name, quantity: item.quantity + 1}))
     console.log(cart)
   };
 
   const handleDecrement = (item) => {
-    if (cart.items[item].quantity > 0) {
-        item.quantity -= 1
-        dispatch(updateQuantity(item))
+    if (item.quantity > 0) {
+        dispatch(updateQuantity({name: item.name, quantity: item.quantity - 1}))
+    } else {
+        dispatch(removeItem(item.name))
     }
   };
 
   const handleRemove = (item) => {
-    dispatch(removeItem(item))
+    dispatch(removeItem(item.name))
   };
 
   // Calculate total cost based on quantity for an item
@@ -45,9 +50,6 @@ const CartItem = ({ onContinueShopping }) => {
     return parseInt(cost) * item.quantity
   };
 
-  const handleCheckoutShopping = (e) => {
-    alert('Functionality to be added for future reference');
-  };
 
   return (
     <div className="cart-container">
